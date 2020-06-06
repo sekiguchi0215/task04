@@ -1,7 +1,7 @@
 <div class="body">
 	<div class="container">
 		<p class="notice"><%= notice %></p>
-		<div class="top-message col-md-offset-3 col-md-6">
+		<div class="top-message col-lg-offset-3 col-lg-6">
 			<h1>Welcome to
 				<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 				<strong>Bookers</strong>
@@ -12,8 +12,8 @@
 			</p>
 			<p>you can share and exchange your opinions , inpressions , and emotions</p>
 			<p>about various books!</p>
-			<%= link_to "Log in", _path, class: 'btn btn-default' %>
-			<%= link_to "Sign up", _path, class: 'btn btn-default' %>
+			<%= link_to "Log in", new_user_session_path, class: 'btn btn-default' %>
+			<%= link_to "Sign up", new_user_registration_path, class: 'btn btn-default' %>
 		</div>
 	</div>
 </div>
