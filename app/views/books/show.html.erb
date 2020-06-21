@@ -83,9 +83,33 @@
 								<% end %>
 							</td>
 							<% end %>
+							<td>コメント数： <%= @books.post_comments.count %></td>
 						</tr>
 					</tbody>
 				</table>
+				<table class="table">
+					<tbody>
+						<% @post_comments.each do |post_comment| %>
+						<tr>
+							<td><%= attachment_image_tag post_comment.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
+							<td><%= post_comment.comment %></td>
+							<% if post_comment.user == current_user %>
+							<td>
+								<%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete %>
+							</td>
+							<% end %>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+				<%= form_for [@books, @post_comment] do |f| %>
+				<div class="row">
+					<div class="col-xs-12">
+						<%= f.text_area :comment %>
+					</div>
+				</div>
+				<%= f.submit "送信" %>
+				<% end %>
 			</div>
 		</div>
 	</div>
