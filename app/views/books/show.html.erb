@@ -15,15 +15,25 @@
 							<th>introduction</th>
 							<th><%= @user.introduction %></th>
 						</tr>
+						<tr>
+							<th>follows</th>
+							<th></th>
+						</tr>
+						<tr>
+							<th>followers</th>
+							<th></th>
+						</tr>
 					</tbody>
 				</table>
 				<div class="row">
 					<% if @user.id == current_user.id %>
-					<%= link_to edit_user_path(@user) do %>
-					<button class="col-xs-3 btn btn-default">
-						<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-					</button>
-					<% end %>
+						<%= link_to edit_user_path(@user) do %>
+						<button class="col-xs-3 btn btn-default">
+							<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+						</button>
+						<% end %>
+					
+
 					<% end %>
 				</div>
 
