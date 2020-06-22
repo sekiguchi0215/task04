@@ -17,11 +17,19 @@
 						</tr>
 						<tr>
 							<th>follows</th>
-							<th></th>
+							<th>
+								<%= link_to followers_user_path(@user) do %>
+								<%= @user.followers.count %>
+								<% end %>
+							</th>
 						</tr>
 						<tr>
 							<th>followers</th>
-							<th></th>
+							<th>
+								<%= link_to following_user_path(@user) do %>
+								<%= @user.followings.count %>
+								<% end %>
+							</th>
 						</tr>
 					</tbody>
 				</table>
@@ -32,8 +40,17 @@
 							<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 						</button>
 						<% end %>
-					
-
+					<% end %>
+					<% unless current_user?(@user) %>
+						<% if current_user.following?(@user) %>
+							<%= form_for(current_user.following_relationships.find_by(following_id: @user.id), html: { mathod: :delete }) do |f| %>
+								<%= f.submit "Unfollow", class: "btn btn-large follow-btn" %>
+							<% end %>
+						<% else %>
+							<%= form_for(current_user.following_relationships.build(following_id: @user.id)) do |f| %>
+								<%= f.submit "Follow", class: "btn btn-large follow-btn" %>
+							<% end %>
+						<% end %>
 					<% end %>
 				</div>
 
@@ -101,7 +118,12 @@
 					<tbody>
 						<% @post_comments.each do |post_comment| %>
 						<tr>
-							<td><%= attachment_image_tag post_comment.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
+							<td>
+								<%= link_to post_comment.user do %>
+									<%= attachment_image_tag post_comment.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %><br>
+									<%= post_comment.user.name %>
+								<% end %>
+							</td>
 							<td><%= post_comment.comment %></td>
 							<% if post_comment.user == current_user %>
 							<td>

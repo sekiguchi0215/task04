@@ -17,11 +17,19 @@
 						</tr>
 						<tr>
 							<th>follows</th>
-							<th></th>
+							<th>
+								<%= link_to followers_user_path(@user) do %>
+								<%= @user.followers.count %>
+								<% end %>
+							</th>
 						</tr>
 						<tr>
 							<th>followers</th>
-							<th></th>
+							<th>
+								<%= link_to following_user_path(@user) do %>
+								<%= @user.followings.count %>
+								<% end %>
+							</th>
 						</tr>
 					</tbody>
 				</table>
